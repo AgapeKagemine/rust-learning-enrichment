@@ -14,7 +14,7 @@ Tema untuk programnya bebas. Untuk konsep unit test bisa diterapkan dan juga tid
 diimplementasikan maka murid mendapatkan nilai tambahan dari hasil tugas.
 
 ## Note
-Input validation is still a problem
+Input validation is still really broken, need to handle input better
 
 ## TODO:
 1. Save Data

@@ -128,7 +128,7 @@ impl Equipments {
 
         if input > self.equips.get(index - 1).unwrap().quantity || input < self.equips.get(index - 1).unwrap().quantity {
             print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
-            println!("Input too big");
+            println!("Input too big or too small");
             drop_items(self);
         }
 
