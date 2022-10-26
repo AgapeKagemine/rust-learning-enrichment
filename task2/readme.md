@@ -24,4 +24,6 @@ Input validation is still really broken, need to handle input better
 ## Personal Note
 Welp - not really a CRUD program but i just want to try make this with Rust
 
-Taking too much time too do error handling and not focusing on task aaaaaaaaa
+Taking too much time too do error handling and not focusing on task aaaaaaaaa - 17.00 welp
+
+Clear Screen?: [StackOverflow](https://stackoverflow.com/questions/34837011/how-to-clear-the-terminal-screen-in-rust-after-a-new-line-is-printed)

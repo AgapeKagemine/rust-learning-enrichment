@@ -109,12 +109,12 @@ impl Equipments {
 
     fn reduce_quantity(&mut self, index: usize) {
         if index > 5 {
-            print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
+            clear_screen();
             drop_items(self);
         }
 
         if self.equips.get(index - 1).unwrap().quantity.eq(&0) {
-            print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
+            clear_screen();
             drop_items(self);
         }
 
@@ -127,14 +127,14 @@ impl Equipments {
         };
 
         if input > self.equips.get(index - 1).unwrap().quantity || input < self.equips.get(index - 1).unwrap().quantity {
-            print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
+            clear_screen();
             println!("Input too big or too small");
             drop_items(self);
         }
 
         self.equips.get_mut(index - 1).unwrap().quantity -= input;
 
-        print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
+        clear_screen();
 
         println!("You now have {} {} weapon", weapon_to_string(&self.equips.get(index - 1).unwrap().weapon), self.equips.get(index - 1).unwrap().quantity);
     }
@@ -207,6 +207,24 @@ impl Print for Player {
     }
 }
 
+fn drop_items(equipments: &mut Equipments) {
+    if !equipments.list_all_filter() {
+        println!("No Equipments");
+        return
+    }
+    println!();
+
+    print!("Input which weapon to be dropped: ");
+    flush();
+
+    let index = match get_input() {
+        Some(index) => index.parse::<usize>().unwrap_or(255),
+        None => return
+    };
+
+    equipments.reduce_quantity(index);
+}
+
 fn get_input() -> Option<String> {
     let mut buffer = String::new();
     
@@ -227,27 +245,13 @@ fn flush() {
     }
 }
 
-fn drop_items(equipments: &mut Equipments) {
-    if !equipments.list_all_filter() {
-        println!("No Equipments");
-        return
-    }
-    println!();
-
-    print!("Input which weapon to be dropped: ");
-    flush();
-
-    let index = match get_input() {
-        Some(index) => index.parse::<usize>().unwrap_or(255),
-        None => return
-    };
-
-    equipments.reduce_quantity(index);
+fn clear_screen() {
+    print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
 }
 
 fn main() {
     // Clear Screen... ???
-    print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
+    clear_screen();
     print!("Input your name: ");
     flush();
 
@@ -256,7 +260,7 @@ fn main() {
         None => return
     };
 
-    print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
+    clear_screen();
 
     let hand = Equipment {
         weapon: Weapon::Hand,
@@ -284,7 +288,7 @@ fn main() {
             None => return
         };
 
-        print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
+        clear_screen();
 
         match input.as_str() {
             "1" => equipments.print_all(),
