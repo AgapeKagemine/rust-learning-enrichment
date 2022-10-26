@@ -23,4 +23,5 @@ Input validation is still a problem
 
 ## Personal Note
 Welp - not really a CRUD program but i just want to try make this with Rust
+
 Taking too much time too do error handling and not focusing on task aaaaaaaaa
