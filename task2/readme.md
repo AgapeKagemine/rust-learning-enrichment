@@ -4,11 +4,11 @@ Buatlah sebuah program I/O (Input/ Output) yang menerapkan setidaknya 4 konsep d
 materi Basic Programming. Adapun konsep yang dimaksud adalah sebagai berikut:
 - [:heavy_check_mark:] Struct dan Enum
 - [:heavy_check_mark:] Loop
-- [] Handling process with Result<T>
-- [] Manipulate Vector using built-in func
-- [] Date and time using chrono crate
+- [ ] Handling process with Result<T>
+- [ ] Manipulate Vector using built-in func
+- [ ] Date and time using chrono crate
 - [:heavy_check_mark:] Trait
-- [] Unit Test (Optional)
+- [ ] Unit Test (Optional)
 
 Tema untuk programnya bebas. Untuk konsep unit test bisa diterapkan dan juga tidak, bila
 diimplementasikan maka murid mendapatkan nilai tambahan dari hasil tugas.
