@@ -1,5 +1,9 @@
 use std::io::Write;
 
+// Trim white spaces (enter) with trim method
+// Then get every character in the string with chars method
+// Then reverse the order of every characters (1, 2, 3 -> 3, 2, 1) with rev method
+// Then we collect all separated characters into a collection (String)
 fn reverse_string(document: &str) -> String {
     document.trim().chars().rev().collect::<String>()
 }

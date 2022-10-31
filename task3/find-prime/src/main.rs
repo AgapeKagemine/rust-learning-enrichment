@@ -1,4 +1,4 @@
-// Helper function for finding prime
+// Helper function for finding prime - Naive method
 fn is_prime(number: &u32) -> bool {
     if *number <= 1 { // 1 is not a prime number
         return false;
