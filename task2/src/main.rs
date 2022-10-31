@@ -76,9 +76,6 @@ impl Equipments {
                 flag = true;
             }
         };
-        if flag {
-            return true;
-        }
         flag
     }
 
@@ -182,7 +179,7 @@ impl Player {
                 self.weapon.weapon = Weapon::Gold;
                 self.weapon.quantity = 1;
             },
-            _ => ()
+            _ => return
         };
 
         equipments.equips.get_mut(index - 1).unwrap().quantity -= self.weapon.quantity;
