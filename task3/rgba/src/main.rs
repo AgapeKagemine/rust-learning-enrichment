@@ -61,7 +61,7 @@ fn main() {
     // TODO: User input? - 1
     // TODO: Validate... Pattern - Regex? - 2
 
-    // FF - FF- FF - 00 => Red - Green - Blue - Alpha
+    // FF - FF - FF - 00 => Red - Green - Blue - Alpha
     let hex = String::from("#FFFFFF00"); 
     // print value from the tuples returned by hex_to_rgba function
     rgba_value(hex_to_rgba(&hex));
