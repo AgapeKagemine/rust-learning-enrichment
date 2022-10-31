@@ -58,7 +58,8 @@ fn rgba_value((red, green, blue, alpha): (u8, u8, u8, f32)) {
 }
 
 fn main() {
-    // TODO: User input?
+    // TODO: User input? - 1
+    // TODO: Validate... Pattern - Regex? - 2
 
     // FF - FF- FF - 00 => Red - Green - Blue - Alpha
     let hex = String::from("#FFFFFF00"); 
