@@ -1,5 +1,6 @@
-// Helper Function - Hexadecimal to Decimal
-// Base 16 to Base 10
+/// Helper Function - Hexadecimal to Decimal
+/// 
+///     Base 16 to Base 10
 fn hex_to_decimal(hex: &str) -> Result<u8, String>{
     match u8::from_str_radix(hex, 16) {
         Ok(decimal) => Ok(decimal),
@@ -7,6 +8,7 @@ fn hex_to_decimal(hex: &str) -> Result<u8, String>{
     }
 }
 
+/// Main function to convert hexadecimal to RGBA value
 fn hex_to_rgba(hex: &str) -> (u8, u8, u8, f32) {
     let (_, rgba) = hex.split_at(1); // Throw away # from the rest of the string - tuples
 
@@ -52,7 +54,8 @@ fn hex_to_rgba(hex: &str) -> (u8, u8, u8, f32) {
     (red, green, blue, alpha)
 }
 
-fn rgba_value((red, green, blue, alpha): (u8, u8, u8, f32)) {
+/// Print the decimal value for each color
+fn print_rgba_value((red, green, blue, alpha): (u8, u8, u8, f32)) {
     // Red, Green, Blue, Alpha (Percentage)
     println!("R: {}, G: {}, B: {}, A: {}%", red, green, blue, alpha * 100.0);
 }
@@ -64,5 +67,5 @@ fn main() {
     // FF - FF - FF - 00 => Red - Green - Blue - Alpha
     let hex = String::from("#FFFFFF00"); 
     // print value from the tuples returned by hex_to_rgba function
-    rgba_value(hex_to_rgba(&hex));
+    print_rgba_value(hex_to_rgba(&hex));
 }
