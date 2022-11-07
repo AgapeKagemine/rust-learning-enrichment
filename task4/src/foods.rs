@@ -30,6 +30,7 @@ impl Foods {
         }
     }
 
+    // Get the value from hashmap and into vec (sorted by key of hashmap)
     pub fn into_vec(mut self) -> Vec<Food> {
         let mut fds: Vec<_> = self.foods.drain().map(|kv| kv.1).collect();
         fds.sort_by_key(|fd| fd.id);
@@ -51,9 +52,20 @@ impl Foods {
         true
     }
 
-    pub fn sell(mut self, food: Food) -> u128 {
+    // FIXME: Inelegant - Panic Carnival if the check really don't work
+    pub fn sell(mut self, food: Food) -> (u128, u64) {
+        // Get the food we need to check and change
         let temp: Vec<_> = self.foods.clone().drain().filter(|kv| kv.1.name == food.name ).collect();
 
+        if temp.is_empty() {
+            println!("Maaf makanan tidak ditemukan");
+            return (0, 0);
+        } else if food.stocks > temp.first().unwrap().1.stocks || temp.first().unwrap().1.stocks == 0 {
+            println!("Maaf stock kurang atau habis.....");
+            return (0, 0);
+        };
+
+        // Edit the stocks and create a new Food type
         let new = parse_food(&format!("{},{},{},{}", temp.first().unwrap().1.id, 
                                                                                 temp.first().unwrap().1.name, 
                                                                                 temp.first().unwrap().1.stocks - food.stocks, 
@@ -67,13 +79,15 @@ impl Foods {
             Err(_e) => println!("Save foods error...")
         };
 
-        temp.first().unwrap().1.price * (food.stocks as u128)
+        // Returns price and stocks
+        (temp.first().unwrap().1.price * (food.stocks as u128), temp.first().unwrap().1.stocks)
     }
 
     pub fn insert(&mut self, mut food: Food) {
+        // Collect all but the food that we needs to find
         let new: HashMap<_, _> = self.foods.clone().drain().filter(|kv| kv.1.name != food.name).collect();
 
-        if new.len() != self.foods.len() { // Food is in Data
+        if new.len() != self.foods.len() { // Food is in Data - if data is exist, it will always be less than the food list
             let food_data: Vec<_> = self.foods.clone().drain().filter(|kv| kv.1.name == food.name).collect();
             food.id = food_data.get(0).unwrap().0;
             food.price = food_data.get(0).unwrap().1.price;
@@ -87,8 +101,8 @@ impl Foods {
         self.add(food);
     }
 
-    pub fn is_empty(self) -> bool {
-        self.is_empty()
+    pub fn is_empty_food(self) -> bool {
+        self.foods.is_empty()
     }
 }
 

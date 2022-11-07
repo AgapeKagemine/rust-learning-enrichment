@@ -63,20 +63,22 @@ impl Opt {
                 let mut reports = reports::load_reports(opt.verbose)?;
                 let foods = foods::load_foods(opt.verbose)?;
 
-                let income = match foods::parse_food(&format!("0,{name},{stocks},0")) {
+                let (income, stock) = match foods::parse_food(&format!("0,{name},{stocks},0")) {
                     Ok(food) => foods.sell(food),
-                    Err(_e) => 0
+                    Err(_e) => (0, 0)
                 };
 
-                let date = chrono::offset::Local::now().date().format("%Y-%m-%d").to_string();
-                println!("{:?}", date);
-                
-                match reports::parse_report(&format!("{},{date},{stocks},{income}", reports.next_id())) {
-                    Ok(report) => {
-                        reports.add(report);
-                        reports::save_reports(reports)?;
-                    },
-                    Err(e) => println!("{:?}", e)
+                if income > 0 {
+                    let date = chrono::offset::Local::now().date().format("%Y-%m-%d").to_string();
+                    
+                    match reports::parse_report(&format!("{},{date},{stocks},{income}", reports.next_id())) {
+                        Ok(report) => {
+                            reports.add(report);
+                            reports::save_reports(reports)?;
+                        },
+                        Err(e) => println!("{:?}", e)
+                    }
+                    println!("{} {} porsi telah terjual, total transaksi adalah Rp {income},00, sisa stock {} adalah {stock} porsi", name, stocks, name);
                 }
 
                 Ok(())
