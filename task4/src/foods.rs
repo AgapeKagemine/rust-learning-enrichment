@@ -80,7 +80,7 @@ impl Foods {
         };
 
         // Returns price and stocks
-        (temp.first().unwrap().1.price * (food.stocks as u128), temp.first().unwrap().1.stocks)
+        (temp.first().unwrap().1.price * (food.stocks as u128), temp.first().unwrap().1.stocks - food.stocks)
     }
 
     pub fn insert(&mut self, mut food: Food) {
@@ -90,7 +90,6 @@ impl Foods {
         if new.len() != self.foods.len() { // Food is in Data - if data is exist, it will always be less than the food list
             let food_data: Vec<_> = self.foods.clone().drain().filter(|kv| kv.1.name == food.name).collect();
             food.id = food_data.get(0).unwrap().0;
-            food.price = food_data.get(0).unwrap().1.price;
             food.stocks += &food_data.get(0).unwrap().1.stocks;
             println!("Berhasil mengubah data makanan, {}, dengan stock {}, dan harga Rp {},00", food.name, food.stocks, food.price)
         }else { // Equals => Food not found
@@ -169,6 +168,9 @@ pub fn save_foods(foods: Foods) -> std::io::Result<()> {
     file.flush()?;
 
     for food in foods.into_vec().into_iter() {
+        if food.stocks.eq(&0) {
+            continue;
+        }
         file.write_all(format!("{},{},{},{}\n", food.id, food.name, food.stocks, food.price).as_bytes())?;
     }
 
