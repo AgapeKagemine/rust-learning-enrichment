@@ -1,7 +1,7 @@
 # Dev Restaurant - Task 4
 
 ## What is this?
-Simple console program that takes an argument and do stuff based from the 
+Simple console program that takes an argument and do stuff based from the arguments
 
 ## In Progress
 Fixing stuff and input validation
