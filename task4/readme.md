@@ -3,6 +3,9 @@
 ## What is this?
 Simple console program that takes an argument and do stuff based from the 
 
+## In Progress
+Fixing stuff and input validation
+
 ## Usage...
 cargo run \<command\>
 - Help <--- Run This First For Better Understanding of How To Use tTis program
